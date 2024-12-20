@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quora Posts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <h1>InstaPosts</h1>
+            <a href="http://localhost:8080/posts/new" class="new-post-button">+ New Post</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="post-container">
+            <% if (posts && posts.length > 0) { %>
+                <% for (let post of posts) { %>
+                    <div class="post-card">
+                        <div class="post-header">
+                            <h3>@<%= post.username %></h3>
+                        </div>
+                        <div class="post-body">
+                            <p><%= post.content %></p>
+                        </div>
+                        <div class="post-footer">
+                            <a href="http://localhost:8080/posts/<%= post.id %>" class="action-link">View</a>
+                            <a href="http://localhost:8080/posts/<%= post.id %>/edit" class="action-link">Edit</a>
+                            <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="delete-form">
+                                <button class="delete-button">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p class="no-posts">No posts yet. Create your first one!</p>
+            <% } %>
+        </div>
+    </main>
+</body>
+
+</html>
